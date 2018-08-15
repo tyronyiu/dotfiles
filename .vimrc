@@ -16,9 +16,13 @@
   Plug 'https://github.com/junegunn/goyo.vim'
   Plug 'https://github.com/ryanoasis/vim-devicons'
   Plug 'https://github.com/liuchengxu/space-vim-dark'
-  Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+  " Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
   Plug 'https://github.com/tpope/vim-surround'
+  Plug 'https://github.com/kien/ctrlp.vim'
+  Plug 'https://github.com/ervandew/supertab'
+  " Plug 'https://github.com/SirVer/ultisnips'
   call plug#end()
+
 
 " ------------------------------------------------------------
 " Pathogen Plugin manager
@@ -94,7 +98,7 @@
   let vim_markdown_preview_pandoc=0
 
 " LaTeX pdf preview
-  let g:livepreview_previewer = 'open -a Skim'
+"  let g:livepreview_previewer = 'open -a Skim'
 
 " ------------------------------------------------------------
 " MAPPING
@@ -141,3 +145,4 @@
 " Snippets
 " ------------------------------------------------------------
 nnoremap <F8> :r!date <CR>
+
