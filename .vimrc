@@ -1,4 +1,4 @@
-" .vimrc file customised by Ty Yiu.
+" vimrc file customised by Ty Yiu.
 " Performance improvements
 
   set synmaxcol=200 "Don't bother highlighting anything over 200 chars
