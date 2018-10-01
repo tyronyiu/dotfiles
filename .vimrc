@@ -20,7 +20,10 @@
   Plug 'https://github.com/tpope/vim-surround'
   Plug 'https://github.com/kien/ctrlp.vim'
   Plug 'https://github.com/ervandew/supertab'
-  " Plug 'https://github.com/SirVer/ultisnips'
+  Plug 'vimwiki/vimwiki'
+  Plug 'https://github.com/jonhiggs/MacDict.vim'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'shmargum/vim-sass-colors'
   call plug#end()
 
 
@@ -34,6 +37,13 @@
 " Image Previews
 " ------------------------------------------------------------
   autocmd BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
+
+
+" ------------------------------------------------------------
+"  CTRL-P
+" ------------------------------------------------------------
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|^.git$\|_site'
+
 
 " ------------------------------------------------------------
 " NERDTree
@@ -57,10 +67,30 @@
   let NERDTreeDirArrows = 1
   
 " ------------------------------------------------------------
+" Vimwiki Setup
+" ------------------------------------------------------------
+
+"let wiki_1 = {}
+"let wiki_1.path = '~/Documents/la_bibliotheque/notes/'
+"let wiki_1.path_html = '~/Documents/la_bibliotheque/notes/html/'
+"let wiki_1.custom_wiki2html= '~/code/bash/wiki2html.sh'
+"let wiki_1.syntax = 'markdown'
+"let wiki_1.ext = '.md'
+let wiki_2 = {}
+let wiki_2.path = '~/Documents/Uni/'
+let wiki_2.path_html = '~/Documents/Uni/html/'
+"let wiki_2.syntax = 'markdown'
+"let wiki_2.ext = '.md'
+let g:vimwiki_list = [wiki_2]
+" {'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}
+
+
+" ------------------------------------------------------------
 " GENERALS
 " ------------------------------------------------------------
 " Goyo toggle
   map <C-g> :Goyo<CR>
+
 " hybrid line numbers
 
   set number relativenumber
@@ -144,5 +174,40 @@
 " ------------------------------------------------------------
 " Snippets
 " ------------------------------------------------------------
-nnoremap <F8> :r!date <CR>
+"nnoremap <F8> :r!date <CR>
+" nnoremap <C-I> :r ~/code/snippets 
+set spelllang=en
+set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
 
+
+
+" ------------------------------------------------------------
+" JEKYLL SETUP
+" ------------------------------------------------------------
+
+" YAML highlighting
+
+" ---------------------
+function! MathAndLiquid()
+    "" Define certain regions
+    " Block math. Look for "$$[anything]$$"
+    syn region math start=/\$\$/ end=/\$\$/
+    " inline math. Look for "$[not $][anything]$"
+    syn match math_block '\$[^$].\{-}\$'
+
+    " Liquid single line. Look for "{%[anything]%}"
+    syn match liquid '{%.*%}'
+    " Liquid multiline. Look for "{%[anything]%}[anything]{%[anything]%}"
+    syn region highlight_block start='{% highlight .*%}' end='{%.*%}'
+    " Fenced code blocks, used in GitHub Flavored Markdown (GFM)
+    syn region highlight_block start='```' end='```'
+
+    "" Actually highlight those regions.
+    hi link math Statement
+    hi link liquid Statement
+    hi link highlight_block Function
+    hi link math_block Function
+endfunction
+
+" Call everytime we open a Markdown file
+autocmd BufRead,BufNewFile,BufEnter *.md,*.markdown call MathAndLiquid()

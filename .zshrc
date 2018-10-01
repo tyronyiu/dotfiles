@@ -91,7 +91,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #-------------------------------------
 # ALIASES
 #--------------------------------------
-
+alias v="vim"
+alias V="vim"
 alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000"
 alias lc="colorls -1 --sd --gs"
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
@@ -113,14 +114,16 @@ alias c="cd ~/code"
 alias md="cd ~/Documents/la_bibliotheque/MD"
 alias py="cd ~/code/python"
 alias ba="cd ~/code/bash"
-alias bn="cd /usr/local/bin"
+alias bi="cd ~/bin"
 alias sn="cd ~/code/snippets"
+alias uni="cd ~/Documents/Uni"
 #-------------------------------------
 # EDIT shortcuts
 #-------------------------------------
 alias evrc="vim ~/.vimrc"
 alias errc="vim ~/.config/ranger/rc.conf"
 alias ezrc="vim ~/.zshrc"
+alias euni="vim ~/Documents/Uni/index.wiki"
 #-------------------------------------
 # PLUGINS
 #-------------------------------------
@@ -135,3 +138,4 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 export ZSH="/Users/tyyiu/.oh-my-zsh"
 EDITOR=vim
+PATH=~/bin:$PATH
