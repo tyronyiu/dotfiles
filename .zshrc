@@ -125,6 +125,14 @@ alias errc="vim ~/.config/ranger/rc.conf"
 alias ezrc="vim ~/.zshrc"
 alias euni="vim ~/Documents/Uni/index.wiki"
 #-------------------------------------
+# GIT shortcuts
+#-------------------------------------
+alias push="git push -u origin master"
+alias gd="git add ."
+function gc() {
+  git commit -m "$*"
+}
+#-------------------------------------
 # PLUGINS
 #-------------------------------------
 
