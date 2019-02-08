@@ -245,8 +245,8 @@ autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh
 " 
   
 hi StatusLine guibg=NONE ctermbg=NONE
-hi User1 ctermbg=NONE guifg=#87ff5f guibg=black gui=BOLD
-hi User2 ctermbg=NONE guifg=white guibg=black gui=BOLD
+hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE gui=BOLD
+hi User2 ctermbg=NONE guifg=white guibg=NONE gui=BOLD
 
 set laststatus=2
 set statusline=
