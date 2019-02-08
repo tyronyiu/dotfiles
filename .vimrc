@@ -166,8 +166,8 @@ nmap ga <Plug>(EasyAlign)
 " map toggle
     map <C-n> :NERDTreeToggle<CR>
 " open NERDTree on vim load
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    "autocmd StdinReadPre * let s:std_in=1
+    "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if NERDTree is only instance
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Nerdtree minimal UI
@@ -208,16 +208,6 @@ nmap ga <Plug>(EasyAlign)
     autocmd BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
 "}}}
 
-" vim-markdown-preview{{{
-" ------------------------------------------------------------
-  "let vim_markdown_preview_hotkey='<leader>m'
-  "let vim_markdown_preview_browser='Google Chrome'
-  "let vim_markdown_preview_github=1
-  "let vim_markdown_preview_pandoc=0
-" LaTeX pdf preview
-"  let g:livepreview_previewer = 'open -a Skim'
-"  }}}
-
 "Auto Commands{{{
 " ------------------------------------------------------------
 autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh 
@@ -249,17 +239,11 @@ autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh
   endfunction
 
   autocmd! colorscheme gotham call s:patch_colors()
-  
-    " colorscheme space-vim-dark
-"  hi LineNr ctermbg=NONE
-"  hi Folded ctermbg=NONE
-"  hi FoldColumn ctermbg=NONE
-  "hi Comment guifg=#5C6370 ctermfg=59
-    "  let g:space_vim_dark_background = 233 
-    "  color space-vim-dark
-  "hi Normal guibg=NONE ctermbg=NONE
-"}}}
 
+" STATUSLINE{{{
+" ------------------------------------------------------------
+" 
+  
 hi StatusLine guibg=NONE ctermbg=NONE
 hi User1 ctermbg=NONE guifg=#87ff5f guibg=black gui=BOLD
 hi User2 ctermbg=NONE guifg=white guibg=black gui=BOLD
@@ -280,4 +264,9 @@ set statusline+=%1*\ \ \ type:\
 set statusline+=%2*%Y%*\              " file type
 set statusline+=%2*\ %= 
 set statusline+=%2*%10((%1*line:%2*%l,\ %1*col:%2*%c)%)\   " line and column
+
+"}}}
+
+
+"}}}
 
