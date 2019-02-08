@@ -54,7 +54,7 @@
 
 " qmacro: "0"ayt $B"syt|A=a*sjA| "
 
-    inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
+    inoremap <Space><Space> <Esc>/<Enter>"_c4l
     autocmd FileType html inoremap ;div <div></div><++><Esc>FdT>i
     autocmd FileType html inoremap ;header <header></header><++><Esc>FhT>i
     autocmd FileType html inoremap ;h1 <h1></h1><++><Esc>FhT>i
@@ -75,29 +75,29 @@
 " YAML highlighting{{{
 " ------------------------------------------------------------
 
-function! MathAndLiquid()
+"function! MathAndLiquid()
     "" Define certain regions
     " Block math. Look for "$$[anything]$$"
-    syn region math start=/\$\$/ end=/\$\$/
+"    syn region math start=/\$\$/ end=/\$\$/
     " inline math. Look for "$[not $][anything]$"
-    syn match math_block '\$[^$].\{-}\$'
+"    syn match math_block '\$[^$].\{-}\$'
 
     " Liquid single line. Look for "{%[anything]%}"
-    syn match liquid '{%.*%}'
+"    syn match liquid '{%.*%}'
     " Liquid multiline. Look for "{%[anything]%}[anything]{%[anything]%}"
-    syn region highlight_block start='{% highlight .*%}' end='{%.*%}'
+"    syn region highlight_block start='{% highlight .*%}' end='{%.*%}'
     " Fenced code blocks, used in GitHub Flavored Markdown (GFM)
-    syn region highlight_block start='```' end='```'
+"    syn region highlight_block start='```' end='```'
 
     "" Actually highlight those regions.
-    hi link math Statement
-    hi link liquid Statement
-    hi link highlight_block Function
-    hi link math_block Function
-endfunction
+"    hi link math Statement
+"    hi link liquid Statement
+"    hi link highlight_block Function
+"    hi link math_block Function
+"endfunction
 
 " Call everytime we open a Markdown file
-autocmd BufRead,BufNewFile,BufEnter *.md,*.markdown call MathAndLiquid()
+"autocmd BufRead,BufNewFile,BufEnter *.md,*.markdown call MathAndLiquid()
 "}}}
 
 " IndentLine {{{
@@ -144,6 +144,7 @@ set hlsearch            " highlight all matches
   " Plug 'Yggdroot/indentLine'
   Plug 'junegunn/vim-easy-align'
   Plug 'whatyouhide/vim-gotham'
+  " Plug 'mcchrish/nnn.vim'
   call plug#end()
 
 "}}}
@@ -157,7 +158,7 @@ nmap ga <Plug>(EasyAlign)
 
 "  CTRL-P{{{
 " ------------------------------------------------------------
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|^.git$\|_site'
+" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|^.git$\|_site'
 "}}}
 
 " NERDTree{{{
@@ -188,12 +189,12 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|^.git$\|_site'
     "let wiki_1.custom_wiki2html= '~/code/bash/wiki2html.sh'
     "let wiki_1.syntax = 'markdown'
     "let wiki_1.ext = '.md'
-    let wiki_2 = {}
-    let wiki_2.path = '~/repos/jekyll/Cognitiones/_posts'
-    let wiki_2.path_html = '~/repos/jekyll/Cognitiones/_html/'
-    let wiki_2.syntax = 'markdown'
-    let wiki_2.ext = '.md'
-    let g:vimwiki_list = [wiki_2]
+    "let wiki_2 = {}
+    "let wiki_2.path = '~/repos/jekyll/Cognitiones/_posts'
+    "let wiki_2.path_html = '~/repos/jekyll/Cognitiones/_html/'
+    "let wiki_2.syntax = 'markdown'
+    "let wiki_2.ext = '.md'
+    "let g:vimwiki_list = [wiki_2]
     " {'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}
 "}}}
   
@@ -209,17 +210,17 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|^.git$\|_site'
 
 " vim-markdown-preview{{{
 " ------------------------------------------------------------
-  let vim_markdown_preview_hotkey='<leader>m'
-  let vim_markdown_preview_browser='Google Chrome'
-  let vim_markdown_preview_github=1
-  let vim_markdown_preview_pandoc=0
+  "let vim_markdown_preview_hotkey='<leader>m'
+  "let vim_markdown_preview_browser='Google Chrome'
+  "let vim_markdown_preview_github=1
+  "let vim_markdown_preview_pandoc=0
 " LaTeX pdf preview
 "  let g:livepreview_previewer = 'open -a Skim'
 "  }}}
 
 "Auto Commands{{{
 " ------------------------------------------------------------
-autocmd BufWritePost *Users/tyyiu/repos/jekyll/Cognitiones/* silent! ! ~/bin/syncer.sh 
+autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh 
 "    autocmd BufWritePost * ! ~/bin/syncer.sh 
 "}}}
 
@@ -258,3 +259,25 @@ autocmd BufWritePost *Users/tyyiu/repos/jekyll/Cognitiones/* silent! ! ~/bin/syn
     "  color space-vim-dark
   "hi Normal guibg=NONE ctermbg=NONE
 "}}}
+
+hi StatusLine guibg=NONE ctermbg=NONE
+hi User1 ctermbg=NONE guifg=#87ff5f guibg=black gui=BOLD
+hi User2 ctermbg=NONE guifg=white guibg=black gui=BOLD
+
+set laststatus=2
+set statusline=
+set statusline+=%<\                      " cut at start
+set statusline+=%1*\ Buffer:\ 
+set statusline+=%2*[%n%H%M%R%W]        " flags and buf no
+"set statusline+=%2*\ %= 
+set statusline+=%1*\ \ \ file:\ 
+set statusline+=%2*%f%*
+set statusline+=%1*\ \ \ path:\ 
+set statusline+=%2*%F%*
+"set statusline+=\ %*
+"set statusline+=%2#keyword#\ %F
+set statusline+=%1*\ \ \ type:\ 
+set statusline+=%2*%Y%*\              " file type
+set statusline+=%2*\ %= 
+set statusline+=%2*%10((%1*line:%2*%l,\ %1*col:%2*%c)%)\   " line and column
+
