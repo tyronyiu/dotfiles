@@ -120,9 +120,6 @@ set hlsearch            " highlight all matches
  set foldlevel=0
  set foldmethod=marker
  set modelines=1
-" hi Folded guibg=NONE
-" hi Folded guifg=white
-" vim:foldmethod=marker:foldlevel=0 
 " }}}
 
 " PLUG plugin manager{{{
@@ -166,8 +163,8 @@ nmap ga <Plug>(EasyAlign)
 " map toggle
     map <C-n> :NERDTreeToggle<CR>
 " open NERDTree on vim load
-    "autocmd StdinReadPre * let s:std_in=1
-    "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if NERDTree is only instance
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Nerdtree minimal UI
@@ -177,8 +174,40 @@ nmap ga <Plug>(EasyAlign)
   
 " GOYO-Plugin{{{
 " ------------------------------------------------------------
-  map <C-g> :Goyo<CR>
-  let g:goyo_linenr = 1
+    map <C-g> :Goyo<CR>
+    let g:goyo_linenr = 1
+
+    function! s:goyo_enter()
+     " silent !tmux set status off
+      silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+      set noshowmode
+      set noshowcmd
+      let b:quitting = 0
+      let b:quitting_bang = 0
+      autocmd QuitPre <buffer> let b:quitting = 1
+      cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q! set scrolloff=999
+      " ...
+    endfunction
+
+    function! s:goyo_leave()
+      silent !tmux set status on
+      silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+      set showmode
+      set showcmd
+      " Quit Vim if this is the only remaining buffer
+      if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+        if b:quitting_bang
+          qa!
+        else
+          qa
+        endif
+      endifset scrolloff=5
+      " ...
+    endfunction
+
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 "}}}
   
 " Vimwiki Setup{{{
@@ -210,40 +239,34 @@ nmap ga <Plug>(EasyAlign)
 
 "Auto Commands{{{
 " ------------------------------------------------------------
-autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh 
+    autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh 
 "    autocmd BufWritePost * ! ~/bin/syncer.sh 
 "}}}
 
 " THEMING{{{
 " ------------------------------------------------------------
-  " This fixes reloading issues had with exiting GoYo
-  " Goyo reloads the colorscheme on exit and custom changes are not applied
-  " anymore
     set termguicolors
-    "  let ayucolor="mirage"
-    "  colorscheme ayu
     colorscheme gotham
 
   hi Normal guibg=NONE ctermbg=NONE
   hi LineNr guibg=NONE ctermbg=NONE
   hi Folded guibg=NONE ctermbg=NONE
-  "guifg=lightgray
   hi FoldColumn guibg=NONE ctermbg=NONE
 
   function! s:patch_colors()
   hi Normal guibg=NONE ctermbg=NONE
   hi LineNr guibg=NONE ctermbg=NONE
   hi Folded guibg=NONE ctermbg=NONE
-  "guifg=lightgray
   hi FoldColumn guibg=NONE ctermbg=NONE
+  hi StatusLine guibg=NONE ctermbg=NONE
+  hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE gui=BOLD
+  hi User2 ctermbg=NONE guifg=white guibg=NONE gui=BOLD
   endfunction
 
   autocmd! colorscheme gotham call s:patch_colors()
 
 " STATUSLINE{{{
 " ------------------------------------------------------------
-" 
-  
 hi StatusLine guibg=NONE ctermbg=NONE
 hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE gui=BOLD
 hi User2 ctermbg=NONE guifg=white guibg=NONE gui=BOLD
@@ -267,6 +290,29 @@ set statusline+=%2*%10((%1*line:%2*%l,\ %1*col:%2*%c)%)\   " line and column
 
 "}}}
 
-
 "}}}
+
+function! MarkdownLevel()
+    if getline(v:lnum) =~ '^# .*$'
+        return ">1"
+    endif
+    if getline(v:lnum) =~ '^## .*$'
+        return ">2"
+    endif
+    if getline(v:lnum) =~ '^### .*$'
+        return ">3"
+    endif
+    if getline(v:lnum) =~ '^#### .*$'
+        return ">4"
+    endif
+    if getline(v:lnum) =~ '^##### .*$'
+        return ">5"
+    endif
+    if getline(v:lnum) =~ '^###### .*$'
+        return ">6"
+    endif
+    return "=" 
+endfunction
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.md setlocal foldmethod=expr
 
