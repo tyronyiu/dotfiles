@@ -142,6 +142,7 @@ set hlsearch            " highlight all matches
   Plug 'junegunn/vim-easy-align'
   Plug 'whatyouhide/vim-gotham'
   " Plug 'mcchrish/nnn.vim'
+  "Plug 'https://github.com/junegunn/limelight.vim.git'
   call plug#end()
 
 "}}}
@@ -176,7 +177,7 @@ nmap ga <Plug>(EasyAlign)
 " ------------------------------------------------------------
     map <C-g> :Goyo<CR>
     let g:goyo_linenr = 1
-
+    let g:limelight_conceal_ctermfg = 'gray'
     function! s:goyo_enter()
      " silent !tmux set status off
       silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
@@ -186,6 +187,7 @@ nmap ga <Plug>(EasyAlign)
       let b:quitting_bang = 0
       autocmd QuitPre <buffer> let b:quitting = 1
       cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q! set scrolloff=999
+      call Patch_colors()
       " ...
     endfunction
 
@@ -201,7 +203,9 @@ nmap ga <Plug>(EasyAlign)
         else
           qa
         endif
-      endifset scrolloff=5
+      endif
+      set scrolloff=5
+      call Patch_colors()
       " ...
     endfunction
 
@@ -246,47 +250,60 @@ nmap ga <Plug>(EasyAlign)
 " THEMING{{{
 " ------------------------------------------------------------
     set termguicolors
-    colorscheme gotham
+    "colorscheme gotham
 
   hi Normal guibg=NONE ctermbg=NONE
-  hi LineNr guibg=NONE ctermbg=NONE
-  hi Folded guibg=NONE ctermbg=NONE
-  hi FoldColumn guibg=NONE ctermbg=NONE
+  hi LineNr guibg=NONE ctermbg=NONE guifg=lightgreen ctermfg=lightgreen
+  hi Folded guibg=NONE ctermbg=NONE ctermfg=grey
+  hi FoldColumn guibg=NONE ctermbg=NONE ctermfg=grey
+  hi CursorLineNr ctermfg=white ctermbg=NONE
+  hi Comment guibg=NONE guifg=grey ctermbg=NONE ctermfg=grey
+  
 
-  function! s:patch_colors()
-  hi Normal guibg=NONE ctermbg=NONE
-  hi LineNr guibg=NONE ctermbg=NONE
-  hi Folded guibg=NONE ctermbg=NONE
-  hi FoldColumn guibg=NONE ctermbg=NONE
-  hi StatusLine guibg=NONE ctermbg=NONE
-  hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE gui=BOLD
-  hi User2 ctermbg=NONE guifg=white guibg=NONE gui=BOLD
+  function! Patch_colors()
+    hi Normal guibg=NONE ctermbg=NONE
+    hi LineNr guibg=NONE ctermbg=NONE guifg=lightgreen ctermfg=lightgreen
+    hi Folded guibg=NONE ctermbg=NONE ctermfg=grey
+    hi FoldColumn guibg=NONE ctermbg=NONE ctermfg=grey
+    hi CursorLineNr ctermfg=white ctermbg=NONE
+    hi Comment guibg=NONE guifg=grey ctermbg=NONE ctermfg=grey
+    hi StatusLine guibg=NONE ctermbg=NONE
+    hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE ctermfg=lightgreen
+    hi User2 ctermbg=NONE guifg=white guibg=NONE 
+    set laststatus=2
+    set statusline=
+    set statusline+=%1*\ \ Buffer:\ 
+    set statusline+=%2*[%n%H%M%R%W]                         " flags and buf no
+    set statusline+=%1*\ \ \ file:\ 
+    set statusline+=%2*%f%*
+    set statusline+=%1*\ \ \ path:\ 
+    set statusline+=%2*%f%*         
+    set statusline+=%1*\ \ \ type:\ 
+    set statusline+=%2*%Y%*
+    set statusline+=%2*\ %=
+    set statusline+=%2*%10((%1*line:%2*%l,\ %1*col:%2*%c)%)\ " line and column
   endfunction
 
-  autocmd! colorscheme gotham call s:patch_colors()
+    "autocmd! colorscheme gotham call Patch_colors()
 
 " STATUSLINE{{{
 " ------------------------------------------------------------
 hi StatusLine guibg=NONE ctermbg=NONE
-hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE gui=BOLD
-hi User2 ctermbg=NONE guifg=white guibg=NONE gui=BOLD
+hi User1 ctermbg=NONE guifg=#87ff5f guibg=NONE ctermfg=lightgreen
+hi User2 ctermbg=NONE guifg=white guibg=NONE 
 
 set laststatus=2
 set statusline=
-set statusline+=%<\                      " cut at start
-set statusline+=%1*\ Buffer:\ 
-set statusline+=%2*[%n%H%M%R%W]        " flags and buf no
-"set statusline+=%2*\ %= 
+set statusline+=%1*\ \ Buffer:\ 
+set statusline+=%2*[%n%H%M%R%W]                         " flags and buf no
 set statusline+=%1*\ \ \ file:\ 
 set statusline+=%2*%f%*
 set statusline+=%1*\ \ \ path:\ 
-set statusline+=%2*%F%*
-"set statusline+=\ %*
-"set statusline+=%2#keyword#\ %F
+set statusline+=%2*%f%*         
 set statusline+=%1*\ \ \ type:\ 
-set statusline+=%2*%Y%*\              " file type
+set statusline+=%2*%Y%*
 set statusline+=%2*\ %= 
-set statusline+=%2*%10((%1*line:%2*%l,\ %1*col:%2*%c)%)\   " line and column
+set statusline+=%2*%10((%1*line:%2*%l,\ %1*col:%2*%c)%)\ " line and column
 
 "}}}
 

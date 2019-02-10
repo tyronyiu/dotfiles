@@ -1,5 +1,5 @@
 PROMPT='
-$FG[255]%m: $FG[119]$(get_pwd) 
+$FG[255]User: $FG[119]%m: $FG[255]Location: $FG[119]$(get_pwd) 
 $FG[119]$(date +%T) $FG[255]$(prompt_git)
 $FG[119]→ $reset_color '
 

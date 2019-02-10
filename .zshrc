@@ -1,6 +1,7 @@
 #ZSHRC SETUP{{{
 #-------------------------------------
 ZSH=$HOME/.oh-my-zsh
+export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
 
 
 #Browser-Sync setup{{{
@@ -23,8 +24,9 @@ ZSH_THEME="TY"
 # ALIASES{{{
 #--------------------------------------
 alias N="nnn"
-alias v="vim"
-alias V="vim"
+alias vim="/usr/local/bin/vim"
+alias vi="/usr/local/bin/vim"
+alias v="/usr/local/bin/vim"
 alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000"
 alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 #}}}
@@ -73,7 +75,7 @@ chpwd() {
 source $ZSH/oh-my-zsh.sh
 export ZSH="/Users/tyyiu/.oh-my-zsh"
 export EDITOR=vim
-PATH=~/bin:$PATH
+#PATH=~/bin:$PATH
 PIP_REQUIRE_VIRTUALENV=false
 #}}}
 

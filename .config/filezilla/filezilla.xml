@@ -60,9 +60,30 @@
 		<Setting name="Concurrent upload limit">0</Setting>
 		<Setting name="Update Check">1</Setting>
 		<Setting name="Update Check Interval">7</Setting>
-		<Setting name="Last automatic update check">2019-02-02 19:36:41</Setting>
+		<Setting name="Last automatic update check">2019-02-10 03:38:13</Setting>
 		<Setting name="Last automatic update version">3.39.0</Setting>
-		<Setting name="Update Check New Version"></Setting>
+		<Setting name="Update Check New Version">nightly 2019-02-09 http://filezilla-project.org/nightlies/2019-02-09/x86_64-apple-darwin18.2.0/FileZilla3.app.tar.bz2 10928220 sha512 e4cd54c1e7b9a2da3069f462000d75d156aec02c82807043e705981a07b89fad0b7ced88fe7f5cce56c8d5ec03a5edfd55cc367e4ef7c0b5621214fb396f1146 
+release 3.40.0 https://dl4.cdn.filezilla-project.org/FileZilla_3.40.0_macosx-x86.app.tar.bz2 10687489 sha512 a9b2215ece5ca7b0db23ddbd2806f2e4f7d78b3026d8b96b344f2f4372e9378a1d2949340d556f6a79d9610e9d3a8ff19581047dd837f02f6ffed7e097443d62
+
+3.40.0 (2019-01-25)
+
+- Official binaries are now linked against GnuTLS 3.6.6
+
+3.40.0-rc2 (2019-01-22)
+
+- Fix regression introduced in rc1 where adding files to queue creates extra server items if the connection was established through the Site Manager
+
+3.40.0-rc1 (2019-01-18)
+
++ Added TLS 1.3 support by linking official binaries against GnuTLS 3.6.5
++ Refactored how sites and servers are being represented internally to fix issues trigged by renaming sites in the Site Manager
+- Fix display of server names containing ampersands in several dialogs
+- Fix regular expression filter in the quick search panel
+- Fix a crash if files are added to the queue when there are already files for multiple different servers in the queue
+- Fix a crash applying filters when there are no selected files and the focused item is past the new file count
+- Fix a crash if emptying the queue while a directory creation item is active
+- Fix a potential crash if FileZilla is being closed the moment a delayed dialog has already been created but before it is shown.
+</Setting>
 		<Setting name="Update Check Check Beta">0</Setting>
 		<Setting name="Show debug menu">0</Setting>
 		<Setting name="File exists action download">0</Setting>
@@ -95,7 +116,7 @@
 		<Setting name="Custom file associations" />
 		<Setting name="Comparison mode">1</Setting>
 		<Setting name="Comparison threshold">1</Setting>
-		<Setting name="Site Manager position">0 727 192 706 494 </Setting>
+		<Setting name="Site Manager position">0 367 192 706 494 </Setting>
 		<Setting name="Icon theme">default</Setting>
 		<Setting name="Icon scale">125</Setting>
 		<Setting name="Timestamp in message log">0</Setting>
