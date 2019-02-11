@@ -75,7 +75,7 @@ chpwd() {
 source $ZSH/oh-my-zsh.sh
 export ZSH="/Users/tyyiu/.oh-my-zsh"
 export EDITOR=vim
-#PATH=~/bin:$PATH
+PATH=~/bin:$PATH
 PIP_REQUIRE_VIRTUALENV=false
 #}}}
 
