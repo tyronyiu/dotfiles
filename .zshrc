@@ -23,12 +23,11 @@ ZSH_THEME="TY"
 
 # ALIASES{{{
 #--------------------------------------
-alias N="nnn"
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
 alias v="/usr/local/bin/vim"
-alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000"
-alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+#alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000"
+#alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 #}}}
 
 # DIRECTORY shortcuts{{{
@@ -43,6 +42,8 @@ alias py="cd ~/code/python"
 alias ba="cd ~/code/bash"
 alias bi="cd ~/bin"
 alias sn="cd ~/code/snippets"
+
+
 #setopt auto_cd cdpath=$HOME
 unset LSCOLORS
 export CLICOLOR=1
@@ -61,8 +62,8 @@ alias ezrc="vim ~/.zshrc"
 
 plugins=(
   git
-  zsh-autosuggestions
 )
+#  zsh-autosuggestions
 # }}}
 
 # OTHER CONFIGS{{{
@@ -74,14 +75,10 @@ chpwd() {
 
 source $ZSH/oh-my-zsh.sh
 export ZSH="/Users/tyyiu/.oh-my-zsh"
+export EDITOR="vim"
 export EDITOR=vim
+export VISUAL=vim
 PATH=~/bin:$PATH
 PIP_REQUIRE_VIRTUALENV=false
 #}}}
 
-# NNN SETUP{{{
-#-------------------------------------
-export NNN_USE_EDITOR=1
-NNN_BMS="r:~/Documents/;u:~/Uni/"
-
-# }}}
