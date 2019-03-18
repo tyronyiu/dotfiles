@@ -9,6 +9,7 @@
      runtime! ftplugin/man.vim
     "au BufRead,BufNewFile *.md setlocal textwidth=80
      set spelllang=en
+     set spell
     "encoding declaration for vim-devicons
      set encoding=UTF-8
     "more natural splitopening for vim split panes
@@ -53,6 +54,10 @@
     nnoremap <Leader>h :nohlsearch <CR>
    "Toggle Fold
     nnoremap <Leader>m za
+   "Autocorrect
+    nnoremap <Leader>c z=1 <CR> <CR>
+   "Open NETRW
+    nnoremap <Leader>n :Vex <CR>
 " ------------------------------------------------------------
     "inoremap <Space><Space> <Esc>/<Enter>"_c4l
     "autocmd FileType html inoremap ;div <div></div><++><Esc>FdT>i
@@ -226,8 +231,11 @@
 "{{{ Auto Commands
 " ------------------------------------------------------------
 "   autocmd BufWritePost *Users/tyyiu/Uni/* call UpdateDate()
-    autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh 
-"   autocmd BufWritePost * ! ~/bin/syncer.sh 
+"   autocmd BufWritePost *Users/tyyiu/Uni/* silent! ! ~/bin/syncer.sh 
+    autocmd BufEnter *Users/tyyiu/Uni/* silent! !e.
+"   autocmd FileType netrw nnoremap q :bd<CR>
+"   autocmd FileType netrw nnoremap l :<CR><CR>
+"
 " ------------------------------------------------------------
 "}}}
 
@@ -312,5 +320,8 @@
 " ------------------------------------------------------------
 "}}}
 
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
