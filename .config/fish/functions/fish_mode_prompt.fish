@@ -1,0 +1,1 @@
+/Users/tyyiu/.config/fish/functions/theme-pure/fish_mode_prompt.fish

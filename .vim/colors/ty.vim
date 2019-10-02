@@ -10,7 +10,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = "Ty's Markdown Syntax-scheme"
+let g:colors_name = "TY"
 
 hi Normal		guifg=grey                                    ctermfg=grey          ctermbg=none
 hi NonText		guifg=darkGray                                ctermfg=darkGray      ctermbg=none

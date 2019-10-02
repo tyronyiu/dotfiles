@@ -1,13 +1,14 @@
 PROMPT='
-$FG[255]User: $FG[119]%m: $FG[255]Location: $FG[119]$(get_pwd) 
-$FG[119]$(date +%T) $FG[255]$(prompt_git)
-$FG[119]→ $reset_color '
+%{${FG[255]}%}Location: %{${FG[119]}%}$(get_pwd) %{${FG[255]}%}$(prompt_git)
+$USER@%m %{${FG[119]}%}→ %{$reset_color%} '
+# $FG[119]→ $reset_color '
 
 function get_pwd() {
   echo "${PWD/$HOME/~}"
 }
 
-
+# $FG[255]User: $FG[119]%m:
+# $FG[119]$(date +%T)
 # Git: branch/detached head, dirty status
 prompt_git() {
   (( $+commands[git] )) || return
