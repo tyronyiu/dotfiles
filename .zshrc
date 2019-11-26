@@ -39,7 +39,7 @@ alias mpv=" open -na /usr/local/Cellar/mpv/0.29.1_3/mpv.app"
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 set -o vi
-chpwd() ls
+chpwd() ls -tr
 
 #alias mpv="open -na /Applications/mpv.app"
 #alias menu="cd ~/bin && . ./menu"

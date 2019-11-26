@@ -96,7 +96,7 @@
             Plug '/usr/local/opt/fzf'
             Plug 'junegunn/fzf.vim'
             Plug 'dylanaraps/wal.vim'
-            Plug 'mhinz/vim-startify'
+            "Plug 'mhinz/vim-startify'
             Plug 'sedm0784/vim-you-autocorrect'
         "   Plug 'https://github.com/liuchengxu/space-vim-dark'
         "   Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
